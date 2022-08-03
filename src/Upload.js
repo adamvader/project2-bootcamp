@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { push, ref as databaseRef, set } from "firebase/database";
 import {
   getDownloadURL,
@@ -11,18 +11,17 @@ import "./App.css";
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
 
-const Upload = () => {
-  const [inputTextValue, setInputTextValue] = useState("");
-  const [fileInputFile, setFileInputFile] = useState(null);
-  const [fileInputValue, setFileInputValue] = useState("");
+const Upload = (props) => {
+  const [caption, setCaption] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileName, setImageFileName] = useState("");
 
   const handleInputChange = (e) => {
-    if (e.target.name === "inputTextValue") {
-      setInputTextValue(e.target.value);
-    } else if (e.target.name === "fileInputFile") {
-      setFileInputFile(e.target.value);
-    } else if (e.target.name === "fileInputValue") {
-      setFileInputValue(e.target.value);
+    if (e.target.name === "caption") {
+      setCaption(e.target.value);
+    } else if (e.target.name === "imageFileName") {
+      setImageFile(e.target.files[0]);
+      setImageFileName(e.target.value);
     }
   };
 
@@ -31,21 +30,21 @@ const Upload = () => {
 
     const fileRef = storageRef(
       storage,
-      `${IMAGES_FOLDER_NAME}/${fileInputFile.name}`
+      `${IMAGES_FOLDER_NAME}/${imageFile.name}`
     );
 
-    uploadBytes(fileRef, fileInputFile).then(() => {
+    uploadBytes(fileRef, imageFile).then(() => {
       getDownloadURL(fileRef).then((downloadUrl) => {
-        const messagesListRef = databaseRef(database, POSTS_FOLDER_NAME);
-        const newMessagesRef = push(messagesListRef);
-        set(newMessagesRef, {
+        const postsListRef = databaseRef(database, POSTS_FOLDER_NAME);
+        const newPostRef = push(postsListRef);
+        set(newPostRef, {
           imageLink: downloadUrl,
-          text: inputTextValue,
-          authorEmail: loggedInUser.email,
+          caption: caption,
+          authorEmail: props.loggedInUser.email,
         });
-        setFileInputFile(null);
-        setFileInputValue("");
-        setInputTextValue("");
+        setImageFile(null);
+        setImageFileName("");
+        setCaption("");
       });
     });
   };
@@ -53,25 +52,27 @@ const Upload = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <p>{loggedInUser ? loggedInUser.email : null}</p>
+        <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
         <label>
           Upload:
           <input
             type="file"
-            value={fileInputValue}
+            name="imageFileName"
+            value={imageFileName}
             onChange={handleInputChange}
           />
         </label>
         <br />
         <label>
-          Title:
+          Caption:
           <input
             type="text"
-            value={inputTextValue}
+            name="caption"
+            value={caption}
             onChange={handleInputChange}
           />
         </label>
-        <input type="submit" value="Upload!" disabled={!inputTextValue} />
+        <input type="submit" value="Upload!" disabled={!caption} />
       </form>
     </div>
   );
