@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.png";
 import "./App.css";
 import AuthForm from "./AuthForm";
+import UserRating from "./Rating";
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
             Edit <code>src/App.js</code> and save to reload.
           </p>
           <AuthForm />
+          <UserRating />
         </header>
       </div>
     );

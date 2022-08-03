@@ -1,11 +1,27 @@
 import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
-const Rating = () => {
+const UserRating = () => {
+  const [value, setValue] = useState(1);
 
-  //there are 5 stars at the start
-  //user click
-
-  return <div></div>;
+  return (
+    <Box
+      sx={{
+        "& > legend": { mt: 2 },
+      }}
+    >
+      <Typography component="legend">Rating</Typography>
+      <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      />
+    </Box>
+  );
 };
 
-export default Rating;
+export default UserRating;
