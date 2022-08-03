@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
+import { auth } from "./Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,48 +17,49 @@ const AuthForm = () => {
     errorMessage: "",
   });
 
-  const handleChange = (event) =>
-    setAuthData({
+  const handleChange = (event) => {
+    setAuthData((prev) => ({
+      ...prev,
       [event.target.name]: event.target.value,
+    }));
+    console.log(event.target.value);
+  };
+
+  const resetForm = () => {
+    setAuthData({
+      email: "",
+      password: "",
     });
+    setIsNewUser(true);
+    setErrorData({
+      error: "",
+      errorMessage: "",
+    });
+  };
+
+  const updateError = (error) => {
+    setErrorData({
+      errorCode: error.code,
+      errorMessage: error.message,
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (isNewUser) {
-      createUserWithEmailAndPassword(
-        auth,
-        authData.email,
-        authData.password
-      ).catch(errorData);
+      createUserWithEmailAndPassword(auth, authData.email, authData.password)
+        .then(resetForm)
+        .catch(updateError);
     } else {
-      signInWithEmailAndPassword(auth, authData.email, authData.password).catch(
-        errorData
-      );
+      signInWithEmailAndPassword(auth, authData.email, authData.password)
+        .then(resetForm)
+        .catch(updateError);
     }
-
-    const resetForm = () => {
-      setAuthData({
-        email: "",
-        password: "",
-      });
-      setIsNewUser(true);
-      setErrorData({
-        error: "",
-        errorMessage: "",
-      });
-    };
-
-    const errorState = () => {
-      setErrorData({
-        error: errorData.errorCode,
-        errorMessage: errorData.errorMessage,
-      });
-    };
   };
 
   const toggleSignUpOrLogIn = () => {
-    setIsNewUser((state) => !state.isNewUser);
+    setIsNewUser((state) => !isNewUser);
   };
 
   return (
@@ -66,10 +67,16 @@ const AuthForm = () => {
       <p>{isNewUser ? "Sign up with us" : "Log in to start"}</p>
       <form onSubmit={handleSubmit}>
         <span>Email</span>
-        <input type="email" value={authData.email} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          value={authData.email}
+          onChange={handleChange}
+        />
         <span>Password</span>
         <input
           type="password"
+          name="password"
           value={authData.password}
           onChange={handleChange}
         />
@@ -78,7 +85,7 @@ const AuthForm = () => {
         <br />
         <Button variant="link" onClick={toggleSignUpOrLogIn}>
           {isNewUser
-            ? "Clicke here to Log in to your account"
+            ? "Click here to Log in to your account"
             : "Click here to create an account with us"}
         </Button>
       </form>

@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.png";
 import "./App.css";
+import AuthForm from "./AuthForm";
 
 class App extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class App extends React.Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          <AuthForm />
         </header>
       </div>
     );
