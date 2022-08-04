@@ -3,6 +3,8 @@ import logo from "./logo.png";
 import "./App.css";
 import AuthForm from "./AuthForm";
 import UserRating from "./Rating";
+import Upload from "./Upload";
+import NewsFeed from "./NewsFeed";
 
 class App extends React.Component {
   render() {
@@ -15,6 +17,8 @@ class App extends React.Component {
           </p>
           <AuthForm />
           <UserRating />
+          <Upload />
+          <NewsFeed />
         </header>
       </div>
     );
