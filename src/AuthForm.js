@@ -3,6 +3,8 @@ import { auth } from "./Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 
@@ -16,6 +18,7 @@ const AuthForm = () => {
     errorCode: "",
     errorMessage: "",
   });
+  const [newPassword, setNewPassword] = useState("");
 
   const handleChange = (event) => {
     setAuthData((prev) => ({
@@ -58,6 +61,31 @@ const AuthForm = () => {
     }
   };
 
+  const handleForgetSubmit = (event) => {
+    event.preventDefault();
+    sendPasswordResetEmail(auth, authData.email)
+      .then(() => {
+        alert("Email sent!");
+      })
+      .then(resetForm)
+      .catch(updateError);
+  };
+
+  const handleSignOut = (event) => {
+    signOut(auth)
+      .then(() => {
+        alert("Sign-out successful");
+      })
+      .then(resetForm)
+      .catch(updateError);
+  };
+
+  // click forget password
+  // Change to the forget password form
+  // user to input email, new password and confirm password
+  // when 2 password fields are same, press submit to change password, else error
+  // upon submit, show password change successfull
+
   const toggleSignUpOrLogIn = () => {
     setIsNewUser((state) => !isNewUser);
   };
@@ -88,6 +116,8 @@ const AuthForm = () => {
             ? "Click here to Log in to your account"
             : "Click here to create an account with us"}
         </Button>
+
+        <Button variant="link" onClick={toggleSignUpOrLogIn}></Button>
       </form>
     </div>
   );

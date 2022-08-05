@@ -5,6 +5,18 @@ import Typography from "@mui/material/Typography";
 
 const UserRating = () => {
   const [value, setValue] = useState(1);
+  const [locatRate, setLocatRate] =
+    useState[
+      {
+        place: "",
+        rate: [{ value }],
+      }
+    ];
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    setLocatRate({ [event.target.name]: event.target.value });
+  };
 
   return (
     <Box
@@ -14,11 +26,13 @@ const UserRating = () => {
     >
       <Typography component="legend">Rating</Typography>
       <Rating
-        name="simple-controlled"
+        //name="simple-controlled"
         value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+        /*         name={} */
+        onChange={handleChange}
+        /* onChange={(event, newValue) => {
+          setValue(newValue);  
+        }}*/
       />
     </Box>
   );
