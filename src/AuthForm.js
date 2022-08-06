@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 
-const AuthForm = () => {
+const AuthForm = ({loggedInUser}) => {
   const [isNewUser, setIsNewUser] = useState(true);
   const [authData, setAuthData] = useState({
     email: "",
@@ -19,6 +19,7 @@ const AuthForm = () => {
     errorMessage: "",
   });
   const [newPassword, setNewPassword] = useState("");
+  const [logOut, setLogOut] = useState(true);
 
   const handleChange = (event) => {
     setAuthData((prev) => ({
@@ -52,16 +53,18 @@ const AuthForm = () => {
 
     if (isNewUser) {
       createUserWithEmailAndPassword(auth, authData.email, authData.password)
+        .then(setLogOut(false))
         .then(resetForm)
         .catch(updateError);
     } else {
       signInWithEmailAndPassword(auth, authData.email, authData.password)
+        .then(setLogOut(false))
         .then(resetForm)
         .catch(updateError);
     }
   };
 
-  const handleForgetSubmit = (event) => {
+  /*   const handleForgetSubmit = (event) => {
     event.preventDefault();
     sendPasswordResetEmail(auth, authData.email)
       .then(() => {
@@ -69,12 +72,13 @@ const AuthForm = () => {
       })
       .then(resetForm)
       .catch(updateError);
-  };
+  }; */
 
   const handleSignOut = (event) => {
     signOut(auth)
       .then(() => {
         alert("Sign-out successful");
+        setLogOut(true);
       })
       .then(resetForm)
       .catch(updateError);
@@ -116,8 +120,16 @@ const AuthForm = () => {
             ? "Click here to Log in to your account"
             : "Click here to create an account with us"}
         </Button>
+        <br />
+        <input
+          type="button"
+          onClick={handleSignOut}
+          value={loggedInUser ? null : "Sign Out here"}
+        />
 
-        <Button variant="link" onClick={toggleSignUpOrLogIn}></Button>
+        {/*        <Button variant="link" onClick={handleForgetSubmit}>
+          {}
+        </Button> */}
       </form>
     </div>
   );
