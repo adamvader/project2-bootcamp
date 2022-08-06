@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 
-const AuthForm = ({loggedInUser}) => {
+const AuthForm = ({ loggedInUser }) => {
   const [isNewUser, setIsNewUser] = useState(true);
   const [authData, setAuthData] = useState({
     email: "",
@@ -19,7 +19,7 @@ const AuthForm = ({loggedInUser}) => {
     errorMessage: "",
   });
   const [newPassword, setNewPassword] = useState("");
-  const [logOut, setLogOut] = useState(true);
+  // const [logOut, setLogOut] = useState(true);
 
   const handleChange = (event) => {
     setAuthData((prev) => ({
@@ -53,12 +53,12 @@ const AuthForm = ({loggedInUser}) => {
 
     if (isNewUser) {
       createUserWithEmailAndPassword(auth, authData.email, authData.password)
-        .then(setLogOut(false))
+        // .then(setLogOut(false))
         .then(resetForm)
         .catch(updateError);
     } else {
       signInWithEmailAndPassword(auth, authData.email, authData.password)
-        .then(setLogOut(false))
+        // .then(setLogOut(false))
         .then(resetForm)
         .catch(updateError);
     }
@@ -78,7 +78,7 @@ const AuthForm = ({loggedInUser}) => {
     signOut(auth)
       .then(() => {
         alert("Sign-out successful");
-        setLogOut(true);
+        // setLogOut(true);
       })
       .then(resetForm)
       .catch(updateError);
@@ -124,7 +124,8 @@ const AuthForm = ({loggedInUser}) => {
         <input
           type="button"
           onClick={handleSignOut}
-          value={loggedInUser ? null : "Sign Out here"}
+          value="Sign Out here"
+          disabled={!loggedInUser}
         />
 
         {/*        <Button variant="link" onClick={handleForgetSubmit}>

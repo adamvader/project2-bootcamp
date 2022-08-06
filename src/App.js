@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <AuthForm />
+        <AuthForm loggedInUser={loggedInUser} />
         <UserRating />
         <Upload loggedInUser={loggedInUser} />
         <NewsFeed />
