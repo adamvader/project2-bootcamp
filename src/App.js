@@ -6,6 +6,7 @@ import AuthForm from "./AuthForm";
 import UserRating from "./Rating";
 import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
+import SearchBar from "./SearchBar";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <SearchBar />
         <AuthForm loggedInUser={loggedInUser} />
         <UserRating />
         <Upload loggedInUser={loggedInUser} />
