@@ -40,7 +40,7 @@ const Upload = (props) => {
         set(newPostRef, {
           imageLink: downloadUrl,
           caption: caption,
-          // authorEmail: props.loggedInUser.email,
+          authorEmail: props.loggedInUser.email,
         });
         setImageFile(null);
         setImageFileName("");
@@ -52,7 +52,7 @@ const Upload = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* <p>{props.loggedInUser ? props.loggedInUser.email : null}</p> */}
+        <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
         <label>
           Upload:
           <input

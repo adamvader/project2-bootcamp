@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.png";
 import "./App.css";
-import { auth } from "./firebase";
+import { auth } from "./Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import AuthForm from "./AuthForm";
 import UserRating from "./Rating";
@@ -9,14 +8,15 @@ import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setLoggedInUser((prev) => ({ ...prev, loggedInUser: user }));
+        setLoggedInUser(user);
+        return;
       } else {
-        setLoggedInUser((prev) => ({ ...prev, loggedInUser: null }));
+        setLoggedInUser(null);
       }
     });
   }, []);
@@ -24,13 +24,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <AuthForm />
         <UserRating />
-        <Upload />
+        <Upload loggedInUser={loggedInUser} />
         <NewsFeed />
       </header>
     </div>

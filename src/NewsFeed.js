@@ -18,7 +18,7 @@ const NewsFeed = () => {
         {
           key: data.key,
           image: value.imageLink,
-          // author: value.authorEmail,
+          author: value.authorEmail,
           caption: value.caption,
         },
       ]);
@@ -29,7 +29,7 @@ const NewsFeed = () => {
     <Card key={post.key} className="Card">
       <Card.Img variant="top" src={post.image} className="Card-Img" />
       <Card.Text>Caption: {post.caption}</Card.Text>
-      {/* <Card.Text>Author: {post.author}</Card.Text> */}
+      <Card.Text>Author: {post.author}</Card.Text>
     </Card>
   ));
   postCards.reverse();
