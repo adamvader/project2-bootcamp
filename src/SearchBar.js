@@ -81,6 +81,7 @@ export default function GoogleMaps() {
         }
 
         setOptions(newOptions);
+        console.log(newOptions);
       }
     });
 
@@ -91,6 +92,7 @@ export default function GoogleMaps() {
 
   console.log(value);
   console.log(inputValue);
+  console.log(fetch);
 
   const handleSubmit = (event) => {
     event.preventDefault();
