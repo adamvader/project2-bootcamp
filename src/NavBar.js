@@ -6,11 +6,11 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function SimpleBottomNavigation() {
+const NavBar = () => {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: 500, position: "sticky", bottom: 0 }}>
       <BottomNavigation
         showLabels
         value={value}
@@ -24,4 +24,6 @@ export default function SimpleBottomNavigation() {
       </BottomNavigation>
     </Box>
   );
-}
+};
+
+export default NavBar;

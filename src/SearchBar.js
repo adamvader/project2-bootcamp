@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -27,10 +27,10 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 export default function GoogleMaps() {
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState([]);
+  const loaded = useRef(false);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
@@ -44,7 +44,7 @@ export default function GoogleMaps() {
     loaded.current = true;
   }
 
-  const fetch = React.useMemo(
+  const fetch = useMemo(
     () =>
       throttle((request, callback) => {
         autocompleteService.current.getPlacePredictions(request, callback);
@@ -52,7 +52,7 @@ export default function GoogleMaps() {
     []
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     let active = true;
 
     if (!autocompleteService.current && window.google) {
@@ -89,66 +89,86 @@ export default function GoogleMaps() {
     };
   }, [value, inputValue, fetch]);
 
+  console.log(value);
+  console.log(inputValue);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setValue("");
+  };
+
   return (
-    <Autocomplete
-      id="google-map-demo"
-      sx={{ width: 300 }}
-      getOptionLabel={(option) =>
-        typeof option === "string" ? option : option.description
-      }
-      filterOptions={(x) => x}
-      options={options}
-      autoComplete
-      includeInputInList
-      filterSelectedOptions
-      value={value}
-      onChange={(event, newValue) => {
-        setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
-      }}
-      onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
-      }}
-      renderInput={(params) => (
-        <TextField {...params} label="Add a location" fullWidth />
-      )}
-      renderOption={(props, option) => {
-        const matches =
-          option.structured_formatting.main_text_matched_substrings;
-        const parts = parse(
-          option.structured_formatting.main_text,
-          matches.map((match) => [match.offset, match.offset + match.length])
-        );
+    <div>
+      <form>
+        <div>
+          <Autocomplete
+            id="google-map-demo"
+            sx={{ width: 300, bgcolor: "white", mt: 2 }}
+            getOptionLabel={(option) =>
+              typeof option === "string" ? option : option.description
+            }
+            filterOptions={(x) => x}
+            options={options}
+            autoComplete
+            includeInputInList
+            filterSelectedOptions
+            value={value}
+            onChange={(event, newValue) => {
+              setOptions(newValue ? [newValue, ...options] : options);
+              setValue(newValue);
+            }}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label="Find a location" fullWidth />
+            )}
+            renderOption={(props, option) => {
+              const matches =
+                option.structured_formatting.main_text_matched_substrings;
+              const parts = parse(
+                option.structured_formatting.main_text,
+                matches.map((match) => [
+                  match.offset,
+                  match.offset + match.length,
+                ])
+              );
 
-        return (
-          <li {...props}>
-            <Grid container alignItems="center">
-              <Grid item>
-                <Box
-                  component={LocationOnIcon}
-                  sx={{ color: "text.secondary", mr: 2 }}
-                />
-              </Grid>
-              <Grid item xs>
-                {parts.map((part, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      fontWeight: part.highlight ? 700 : 400,
-                    }}
-                  >
-                    {part.text}
-                  </span>
-                ))}
+              return (
+                <li {...props}>
+                  <Grid container alignItems="center">
+                    <Grid item>
+                      <Box
+                        component={LocationOnIcon}
+                        sx={{ color: "text.secondary", mr: 2 }}
+                      />
+                    </Grid>
+                    <Grid item xs>
+                      {parts.map((part, index) => (
+                        <span
+                          key={index}
+                          style={{
+                            fontWeight: part.highlight ? 700 : 400,
+                          }}
+                        >
+                          {part.text}
+                        </span>
+                      ))}
 
-                <Typography variant="body2" color="text.secondary">
-                  {option.structured_formatting.secondary_text}
-                </Typography>
-              </Grid>
-            </Grid>
-          </li>
-        );
-      }}
-    />
+                      <Typography variant="body2" color="text.secondary">
+                        {option.structured_formatting.secondary_text}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </li>
+              );
+            }}
+          />
+        </div>
+        <div>
+          <input type="button" onClick={handleSubmit} value="search" />
+        </div>
+      </form>
+    </div>
   );
 }

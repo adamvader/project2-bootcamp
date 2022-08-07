@@ -7,6 +7,7 @@ import UserRating from "./Rating";
 import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
 import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -30,6 +31,7 @@ const App = () => {
         <UserRating />
         <Upload loggedInUser={loggedInUser} />
         <NewsFeed />
+        <NavBar />
       </header>
     </div>
   );
