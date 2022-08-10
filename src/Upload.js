@@ -7,6 +7,7 @@ import {
 } from "firebase/storage";
 import { database, storage } from "./Firebase";
 import "./App.css";
+import ChooseLocation from "./ChooseLocation";
 
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
@@ -15,6 +16,8 @@ const Upload = (props) => {
   const [caption, setCaption] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imageFileName, setImageFileName] = useState("");
+  const [imageLocation, setImageLocation] = useState("");
+  const [imageLocationID, setImageLocationID] = useState("");
 
   const handleInputChange = (e) => {
     if (e.target.name === "caption") {
@@ -23,6 +26,13 @@ const Upload = (props) => {
       setImageFile(e.target.files[0]);
       setImageFileName(e.target.value);
     }
+  };
+
+  const updateLocation = (e) => {
+    console.log(e);
+    console.log(e[0].place_id);
+    setImageLocation(e[0].description);
+    setImageLocationID(e[0].place_id);
   };
 
   const handleSubmit = (event) => {
@@ -41,6 +51,8 @@ const Upload = (props) => {
           imageLink: downloadUrl,
           caption: caption,
           authorEmail: props.loggedInUser.email,
+          locationID: imageLocationID,
+          locationName: imageLocation,
         });
         setImageFile(null);
         setImageFileName("");
@@ -63,6 +75,7 @@ const Upload = (props) => {
           />
         </label>
         <br />
+        <ChooseLocation onUpdate={updateLocation} />
         <label>
           Caption:
           <input

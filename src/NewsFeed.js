@@ -20,6 +20,7 @@ const NewsFeed = () => {
           image: value.imageLink,
           author: value.authorEmail,
           caption: value.caption,
+          location: value.locationName,
         },
       ]);
     });
@@ -29,6 +30,7 @@ const NewsFeed = () => {
     <Card key={post.key} className="Card">
       <Card.Img variant="top" src={post.image} className="Card-Img" />
       <Card.Text>Caption: {post.caption}</Card.Text>
+      <Card.Text>Location: {post.location}</Card.Text>
       <Card.Text>Author: {post.author}</Card.Text>
     </Card>
   ));
