@@ -8,6 +8,7 @@ import {
 import { database, storage } from "./Firebase";
 import "./App.css";
 import ChooseLocation from "./ChooseLocation";
+import UserRating from "./Rating";
 
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
@@ -18,6 +19,7 @@ const Upload = (props) => {
   const [imageFileName, setImageFileName] = useState("");
   const [imageLocation, setImageLocation] = useState("");
   const [imageLocationID, setImageLocationID] = useState("");
+  const [imageRating, setImageRating] = useState(1);
 
   const handleInputChange = (e) => {
     if (e.target.name === "caption") {
@@ -33,6 +35,11 @@ const Upload = (props) => {
     console.log(e[0].place_id);
     setImageLocation(e[0].description);
     setImageLocationID(e[0].place_id);
+  };
+
+  const updateRating = (e) => {
+    console.log(e);
+    setImageRating(e);
   };
 
   const handleSubmit = (event) => {
@@ -53,6 +60,7 @@ const Upload = (props) => {
           authorEmail: props.loggedInUser.email,
           locationID: imageLocationID,
           locationName: imageLocation,
+          rating: imageRating,
         });
         setImageFile(null);
         setImageFileName("");
@@ -62,7 +70,7 @@ const Upload = (props) => {
   };
 
   return (
-    <div>
+    <div className="Upload">
       <form onSubmit={handleSubmit}>
         <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
         <label>
@@ -85,6 +93,7 @@ const Upload = (props) => {
             onChange={handleInputChange}
           />
         </label>
+        <UserRating onUpdate={updateRating} />
         <input type="submit" value="Upload!" disabled={!caption} />
       </form>
     </div>

@@ -30,7 +30,9 @@ const App = () => {
         <AuthForm loggedInUser={loggedInUser} />
         <UserRating />
         <Upload loggedInUser={loggedInUser} />
-        <NewsFeed />
+        <div className="NewsFeed">
+          <NewsFeed />
+        </div>
         <NavBar />
       </header>
     </div>

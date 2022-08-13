@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
-const UserRating = () => {
+const UserRating = (props) => {
   const [value, setValue] = useState(1);
 
   return (
@@ -18,6 +18,7 @@ const UserRating = () => {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+          props.onUpdate(newValue);
         }}
       />
     </Box>

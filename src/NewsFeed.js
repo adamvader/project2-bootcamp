@@ -21,6 +21,7 @@ const NewsFeed = () => {
           author: value.authorEmail,
           caption: value.caption,
           location: value.locationName,
+          rating: value.rating,
         },
       ]);
     });
@@ -29,6 +30,7 @@ const NewsFeed = () => {
   let postCards = posts.map((post) => (
     <Card key={post.key} className="Card">
       <Card.Img variant="top" src={post.image} className="Card-Img" />
+      <Card.Text>Rating: {post.rating}</Card.Text>
       <Card.Text>Caption: {post.caption}</Card.Text>
       <Card.Text>Location: {post.location}</Card.Text>
       <Card.Text>Author: {post.author}</Card.Text>
