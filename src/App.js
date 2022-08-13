@@ -3,7 +3,6 @@ import "./App.css";
 import { auth } from "./Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import AuthForm from "./AuthForm";
-import UserRating from "./Rating";
 import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
 import SearchBar from "./SearchBar";
@@ -28,7 +27,6 @@ const App = () => {
       <header className="App-header">
         <SearchBar />
         <AuthForm loggedInUser={loggedInUser} />
-        <UserRating />
         <Upload loggedInUser={loggedInUser} />
         <div className="NewsFeed">
           <NewsFeed />

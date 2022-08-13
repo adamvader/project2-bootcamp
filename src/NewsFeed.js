@@ -3,6 +3,7 @@ import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "./Firebase";
 import "./NewsFeed.css";
 import Card from "react-bootstrap/Card";
+import DisplayRating from "./DisplayRating";
 
 const POSTS_FOLDER_NAME = "posts";
 
@@ -30,7 +31,7 @@ const NewsFeed = () => {
   let postCards = posts.map((post) => (
     <Card key={post.key} className="Card">
       <Card.Img variant="top" src={post.image} className="Card-Img" />
-      <Card.Text>Rating: {post.rating}</Card.Text>
+      <DisplayRating data={post.rating} />
       <Card.Text>Caption: {post.caption}</Card.Text>
       <Card.Text>Location: {post.location}</Card.Text>
       <Card.Text>Author: {post.author}</Card.Text>
