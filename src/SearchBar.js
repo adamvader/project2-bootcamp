@@ -7,10 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import LocPage from "./LocationPage";
 
-// This key was created specifically for the demo in mui.com.
-// You need to create a new one for your application.
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 function loadScript(src, position, id) {
@@ -27,7 +24,7 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-export default function GoogleMaps() {
+const SearchBar = (props) => {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -98,11 +95,6 @@ export default function GoogleMaps() {
   console.log(value); //returns the search
   console.log(inputValue); //inputed value to be search
 
-  /* const handleLoadSubmit = (event) => {
-    event.preventDefault();
-    setInputValue("");
-  }; */
-
   return (
     <div>
       <form>
@@ -122,6 +114,8 @@ export default function GoogleMaps() {
             onChange={(event, newValue) => {
               setOptions(newValue ? [newValue, ...options] : options);
               setValue(newValue);
+              console.log(newValue);
+              props.onUpdate(newValue);
             }}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
@@ -174,4 +168,5 @@ export default function GoogleMaps() {
       </form>
     </div>
   );
-}
+};
+export default SearchBar;
