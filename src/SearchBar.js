@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
+import LocPage from "./LocationPage";
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
@@ -81,7 +82,7 @@ export default function GoogleMaps() {
         }
 
         setOptions(newOptions);
-        console.log(newOptions);
+        //console.log(newOptions);
       }
     });
 
@@ -90,14 +91,13 @@ export default function GoogleMaps() {
     };
   }, [value, inputValue, fetch]);
 
-  console.log(value);
-  console.log(inputValue);
-  console.log(fetch);
+  console.log(value); //returns the search
+  console.log(inputValue); //inputed value to be search
 
-  const handleSubmit = (event) => {
+  /* const handleLoadSubmit = (event) => {
     event.preventDefault();
-    setValue("");
-  };
+    setInputValue("");
+  }; */
 
   return (
     <div>
@@ -166,9 +166,6 @@ export default function GoogleMaps() {
               );
             }}
           />
-        </div>
-        <div>
-          <input type="button" onClick={handleSubmit} value="search" />
         </div>
       </form>
     </div>

@@ -7,8 +7,9 @@ import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
+import LocPage from "./LocationPage";
 
-const App = () => {
+const App = ({ onLoadSubmit, LocName, LocPic }) => {
   const [loggedInUser, setLoggedInUser] = useState();
 
   useEffect(() => {
@@ -26,6 +27,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <SearchBar />
+        <LocPage />
+        <br />
         <AuthForm loggedInUser={loggedInUser} />
         <Upload loggedInUser={loggedInUser} />
         <div className="NewsFeed">
