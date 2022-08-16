@@ -32,9 +32,9 @@ const Upload = (props) => {
 
   const updateLocation = (e) => {
     console.log(e);
-    console.log(e[0].place_id);
-    setImageLocation(e[0].description);
-    setImageLocationID(e[0].place_id);
+    console.log(e.place_id);
+    setImageLocation(e.description);
+    setImageLocationID(e.place_id);
   };
 
   const updateRating = (e) => {

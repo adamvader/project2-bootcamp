@@ -69,8 +69,6 @@ export default function GoogleMaps(props) {
     }
 
     fetch({ input: inputValue }, (results) => {
-      console.log(results);
-      props.onUpdate(results);
       if (active) {
         let newOptions = [];
 
@@ -108,6 +106,8 @@ export default function GoogleMaps(props) {
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
           setValue(newValue);
+          console.log(newValue);
+          props.onUpdate(newValue);
         }}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
