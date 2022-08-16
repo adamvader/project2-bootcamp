@@ -48,7 +48,11 @@ export default function GoogleMaps() {
   const fetch = useMemo(
     () =>
       throttle((request, callback) => {
-        autocompleteService.current.getPlacePredictions(request, callback);
+        const newRequest = {
+          ...request,
+          componentRestrictions: { country: "sg" },
+        };
+        autocompleteService.current.getPlacePredictions(newRequest, callback);
       }, 200),
     []
   );
