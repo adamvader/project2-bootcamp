@@ -10,28 +10,24 @@ const LocPage = () => {
   const [locPlaceID, setlocPlaceID] = useState("ChIJ19jnhG092jERM2RkbG9U5aw");
   const [locPic, setLocPic] = useState("");
 
-  const handleLoadSubmit = (event) => {
+  const handleLoadSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locPlaceID}&fields=name%2Cformatted_address%2Cformatted_phone_number%2Cphotos&key=${GOOGLE_MAPS_API_KEY}`
-      )
-      .then((response) => {
-        //(response) => response.data[0]
-        const { data: placeInfo } = response;
-        console.log(placeInfo);
-        console.log(placeInfo.data);
-        console.log(placeInfo.result.photos[0]);
-        setLocName(placeInfo.result.name);
-        setLocAddress(placeInfo.result.formatted_address);
-        const photoReference = placeInfo.result.photos[0].photo_reference;
-        setLocPic(
-          `https://maps.googleapis.com/maps/api/place/photo
-  ?maxwidth=400
-  &photo_reference=${photoReference}
-  &key=${GOOGLE_MAPS_API_KEY}`
-        );
-      });
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${locPlaceID}&fields=name%2Cformatted_address%2Cformatted_phone_number%2Cphotos&key=${GOOGLE_MAPS_API_KEY}`
+    );
+    //const { data: placeInfo } = response;
+    const placeInfo = response.data;
+    console.log(placeInfo);
+    console.log(placeInfo.result.photos[0].photo_reference);
+    setLocName(placeInfo.result.name);
+    setLocAddress(placeInfo.result.formatted_address);
+    const photoReference = placeInfo.result.photos[0].photo_reference;
+    setLocPic(
+      `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoReference}&key=${GOOGLE_MAPS_API_KEY}`
+    );
+    /* await axios.catch( (error) {
+      console.log(error);
+    }); */
   };
 
   return (
@@ -43,7 +39,7 @@ const LocPage = () => {
           </form>
           <p>{locName}</p>
           <p>{locAddress}</p>
-          <p>{locPic}</p>
+          <img src={locPic} />
         </div>
       </div>
     </div>
