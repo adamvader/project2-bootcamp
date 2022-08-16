@@ -6,9 +6,9 @@ const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 const LocPage = () => {
   const [locName, setLocName] = useState("");
-  const [locPic, setLocPic] = useState("");
   const [locAddress, setLocAddress] = useState("");
   const [locPlaceID, setlocPlaceID] = useState("ChIJ19jnhG092jERM2RkbG9U5aw");
+  const [locPic, setLocPic] = useState("");
 
   const handleLoadSubmit = (event) => {
     event.preventDefault();
@@ -24,27 +24,13 @@ const LocPage = () => {
         console.log(placeInfo.result.photos[0]);
         setLocName(placeInfo.result.name);
         setLocAddress(placeInfo.result.formatted_address);
-      })
-      .then((placePhotoData) =>
-        axios.get(`https://maps.googleapis.com/maps/api/place/photo
+        const photoReference = placeInfo.result.photos[0].photo_reference;
+        setLocPic(
+          `https://maps.googleapis.com/maps/api/place/photo
   ?maxwidth=400
-  &photo_reference=${placePhotoData.photos[0]}
-  &key=${GOOGLE_MAPS_API_KEY}`)
-      )
-      .then((response) => {
-        setLocPic(response);
-        console.log(response);
-        /*  const { data: placeInfo } = response;
-
-        console.log(placeInfo.data);
-        console.log(placeInfo.result.photos[0]);
-        setLocName(placeInfo.result.name);
-        setLocAddress(placeInfo.result.formatted_address);
-        setLocPic(placeInfo.result.photos[0]); */
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
+  &photo_reference=${photoReference}
+  &key=${GOOGLE_MAPS_API_KEY}`
+        );
       });
   };
 

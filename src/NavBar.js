@@ -19,8 +19,8 @@ const NavBar = () => {
         }}
       >
         <BottomNavigationAction label="News Feed" icon={<NewspaperIcon />} />
+        <BottomNavigationAction label="Search" icon={<LocationOnIcon />} />
         <BottomNavigationAction label="Uploads" icon={<FileUploadIcon />} />
-        {/* <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} /> */}
       </BottomNavigation>
     </Box>
   );
