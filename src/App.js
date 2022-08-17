@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import AuthForm from "./AuthForm";
 import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
-import SearchBar from "./SearchBar";
+
 import NavBar from "./NavBar";
 import LocPage from "./LocationPage";
 import { Routes, Route, Link } from "react-router-dom";
@@ -27,7 +27,6 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar />
         <LocPage />
         <br />
         <AuthForm loggedInUser={loggedInUser} />
