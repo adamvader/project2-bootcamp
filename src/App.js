@@ -8,6 +8,7 @@ import NewsFeed from "./NewsFeed";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import LocPage from "./LocationPage";
+import { Routes, Route, Link } from "react-router-dom";
 
 const App = ({ onLoadSubmit, LocName, LocPic }) => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -35,6 +36,10 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
           <NewsFeed />
         </div>
         <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+        </Routes>
       </header>
     </div>
   );

@@ -7,6 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ loggedInUser }) => {
   const [isNewUser, setIsNewUser] = useState(true);
@@ -19,6 +20,7 @@ const AuthForm = ({ loggedInUser }) => {
     errorMessage: "",
   });
   const [newPassword, setNewPassword] = useState("");
+  const navigate = useNavigate();
   // const [logOut, setLogOut] = useState(true);
 
   const handleChange = (event) => {
@@ -39,6 +41,7 @@ const AuthForm = ({ loggedInUser }) => {
       error: "",
       errorMessage: "",
     });
+    navigate("/");
   };
 
   const updateError = (error) => {
