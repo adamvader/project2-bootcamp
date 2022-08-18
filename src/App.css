@@ -18,12 +18,16 @@
   color: white;
 }
 
-.Upload {
-  background-color: #214a3d;
+.UploadAndNewsFeed {
+  background-color: #4f295b;
   color: white;
 }
 
-.NewsFeed {
-  background-color: #4f295b;
+.Upload {
+  background-color: #055423;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

@@ -5,7 +5,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import AuthForm from "./AuthForm";
 import Upload from "./Upload";
 import NewsFeed from "./NewsFeed";
-
 import NavBar from "./NavBar";
 import LocPage from "./LocationPage";
 import { Routes, Route, Link } from "react-router-dom";
@@ -24,21 +23,32 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
     });
   }, []);
 
+  const authForm = <AuthForm loggedInUser={loggedInUser} />;
+  const createAccountOrSignIn = (
+    <div>
+      <Link to="authform">Create Account Or Sign In</Link>
+    </div>
+  );
+  const newsfeed = (
+    <div className="UploadAndNewsFeed">
+      {loggedInUser ? <NewsFeed /> : createAccountOrSignIn}
+    </div>
+  );
+
   return (
     <div className="App">
       <header className="App-header">
         <LocPage />
         <br />
-        <AuthForm loggedInUser={loggedInUser} />
-        <Upload loggedInUser={loggedInUser} />
-        <div className="NewsFeed">
-          <NewsFeed />
-        </div>
-        <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
+          <Route path="/" element={newsfeed} />
+          <Route path="/authform" element={authForm} />
+          <Route
+            path="/upload"
+            element={<Upload loggedInUser={loggedInUser} />}
+          />
         </Routes>
+        {loggedInUser && <NavBar />}
       </header>
     </div>
   );

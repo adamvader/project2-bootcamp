@@ -83,7 +83,6 @@ const Upload = (props) => {
           />
         </label>
         <br />
-        <ChooseLocation onUpdate={updateLocation} />
         <label>
           Caption:
           <input
@@ -93,6 +92,8 @@ const Upload = (props) => {
             onChange={handleInputChange}
           />
         </label>
+        <br />
+        <ChooseLocation onUpdate={updateLocation} />
         <UserRating onUpdate={updateRating} />
         <input type="submit" value="Upload!" disabled={!caption} />
       </form>

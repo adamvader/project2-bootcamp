@@ -5,6 +5,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [value, setValue] = React.useState(0);
@@ -18,9 +19,21 @@ const NavBar = () => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="News Feed" icon={<NewspaperIcon />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/"
+          label="News Feed"
+          value="newsfeed"
+          icon={<NewspaperIcon />}
+        />
         <BottomNavigationAction label="Search" icon={<LocationOnIcon />} />
-        <BottomNavigationAction label="Uploads" icon={<FileUploadIcon />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/upload"
+          label="Uploads"
+          value="upload"
+          icon={<FileUploadIcon />}
+        />
       </BottomNavigation>
     </Box>
   );
