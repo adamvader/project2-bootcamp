@@ -26,7 +26,13 @@ const NavBar = () => {
           value="newsfeed"
           icon={<NewspaperIcon />}
         />
-        <BottomNavigationAction label="Search" icon={<LocationOnIcon />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/search"
+          label="Search"
+          value="search"
+          icon={<LocationOnIcon />}
+        />
         <BottomNavigationAction
           component={Link}
           to="/upload"

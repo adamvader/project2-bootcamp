@@ -38,7 +38,6 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <LocPage />
         <br />
         <Routes>
           <Route path="/" element={newsfeed} />
@@ -47,6 +46,7 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
             path="/upload"
             element={<Upload loggedInUser={loggedInUser} />}
           />
+          <Route path="/search" element={<LocPage />} />
         </Routes>
         {loggedInUser && <NavBar />}
       </header>
