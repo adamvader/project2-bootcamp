@@ -9,6 +9,7 @@ import { database, storage } from "./Firebase";
 import "./App.css";
 import ChooseLocation from "./ChooseLocation";
 import UserRating from "./Rating";
+import { useNavigate } from "react-router-dom";
 
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
@@ -20,6 +21,7 @@ const Upload = (props) => {
   const [imageLocation, setImageLocation] = useState("");
   const [imageLocationID, setImageLocationID] = useState("");
   const [imageRating, setImageRating] = useState(1);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     if (e.target.name === "caption") {
@@ -67,6 +69,7 @@ const Upload = (props) => {
         setCaption("");
       });
     });
+    navigate("/");
   };
 
   return (
