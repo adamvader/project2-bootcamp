@@ -140,7 +140,11 @@ const SearchBar = (props) => {
                     <Grid item>
                       <Box
                         component={LocationOnIcon}
-                        sx={{ color: "text.secondary", mr: 2 }}
+                        sx={{
+                          color: "text.secondary",
+                          mr: 2,
+                          align: "center",
+                        }}
                       />
                     </Grid>
                     <Grid item xs>

@@ -43,9 +43,11 @@ const LocPage = () => {
           <form>
             <input type="button" onClick={handleLoadSubmit} value="search" />
           </form>
-          <p>{locName}</p>
-          <p>{locAddress}</p>
-          {locPic && <img src={locPic} />}
+          <div>
+            <p>Name: {locName}</p>
+            <p>Address: {locAddress}</p>
+            {locPic && <img src={locPic} />}
+          </div>
         </div>
       </div>
     </div>

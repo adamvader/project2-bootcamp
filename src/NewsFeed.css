@@ -6,6 +6,8 @@
 }
 
 .Card-Img {
-  width: 50vw;
-  height: 30vh;
+  /* width: 50vw;
+  height: 30vh; */
+  width: 390px;
+  height: 250px;
 }
