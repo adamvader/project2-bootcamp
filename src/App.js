@@ -26,6 +26,7 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
   const authForm = <AuthForm loggedInUser={loggedInUser} />;
   const createAccountOrSignIn = (
     <div>
+      {/* add bestseller log */}
       <Link to="authform">Create Account Or Sign In</Link>
     </div>
   );
