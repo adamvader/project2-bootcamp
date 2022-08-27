@@ -16,6 +16,7 @@ const IMAGES_FOLDER_NAME = "images";
 
 const Upload = (props) => {
   const [caption, setCaption] = useState("");
+  const [comment, setComment] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imageFileName, setImageFileName] = useState("");
   const [imageLocation, setImageLocation] = useState("");
@@ -29,6 +30,8 @@ const Upload = (props) => {
     } else if (e.target.name === "imageFileName") {
       setImageFile(e.target.files[0]);
       setImageFileName(e.target.value);
+    } else if (e.target.name === "comment") {
+      setComment(e.target.value);
     }
   };
 
@@ -59,6 +62,7 @@ const Upload = (props) => {
         set(newPostRef, {
           imageLink: downloadUrl,
           caption: caption,
+          comment: comment,
           authorEmail: props.loggedInUser.email,
           locationID: imageLocationID,
           locationName: imageLocation,
@@ -67,6 +71,7 @@ const Upload = (props) => {
         setImageFile(null);
         setImageFileName("");
         setCaption("");
+        setComment("");
       });
     });
     navigate("/");
@@ -87,11 +92,21 @@ const Upload = (props) => {
         </label>
         <br />
         <label>
-          Caption:
+          Name of Beer:
           <input
             type="text"
             name="caption"
             value={caption}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Comment:
+          <input
+            type="text"
+            name="comment"
+            value={comment}
             onChange={handleInputChange}
           />
         </label>
