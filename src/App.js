@@ -36,7 +36,6 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
       {loggedInUser ? <NewsFeed /> : createAccountOrSignIn}
     </div>
   );
-  const signOut = <UserSignOut loggedInUser={loggedInUser} />;
 
   return (
     <div className="App">
@@ -45,6 +44,7 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
         <Routes>
           <Route path="/" element={newsfeed} />
           <Route path="/authform" element={authForm} />
+
           <Route
             path="/upload"
             element={<Upload loggedInUser={loggedInUser} />}
