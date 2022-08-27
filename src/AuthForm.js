@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
 
 const AuthForm = ({ loggedInUser }) => {
   const [isNewUser, setIsNewUser] = useState(true);
@@ -67,16 +68,6 @@ const AuthForm = ({ loggedInUser }) => {
     }
   };
 
-  /*   const handleForgetSubmit = (event) => {
-    event.preventDefault();
-    sendPasswordResetEmail(auth, authData.email)
-      .then(() => {
-        alert("Email sent!");
-      })
-      .then(resetForm)
-      .catch(updateError);
-  }; */
-
   const handleSignOut = (event) => {
     signOut(auth)
       .then(() => {
@@ -87,12 +78,6 @@ const AuthForm = ({ loggedInUser }) => {
       .catch(updateError);
   };
 
-  // click forget password
-  // Change to the forget password form
-  // user to input email, new password and confirm password
-  // when 2 password fields are same, press submit to change password, else error
-  // upon submit, show password change successfull
-
   const toggleSignUpOrLogIn = () => {
     setIsNewUser((state) => !isNewUser);
   };
@@ -100,8 +85,31 @@ const AuthForm = ({ loggedInUser }) => {
   return (
     <div>
       <p>{isNewUser ? "Sign up with us" : "Log in to start"}</p>
-      <form onSubmit={handleSubmit}>
-        <span>Email</span>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            value={authData.email}
+            onChange={handleChange}
+          />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={authData.password}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        {/*  <span>Email</span>
         <input
           type="email"
           name="email"
@@ -114,7 +122,7 @@ const AuthForm = ({ loggedInUser }) => {
           name="password"
           value={authData.password}
           onChange={handleChange}
-        />
+        /> */}
         <br />
         <input type="submit" value={isNewUser ? "Sign up" : "Log in"} />
         <br />
@@ -130,11 +138,7 @@ const AuthForm = ({ loggedInUser }) => {
           value="Sign Out here"
           disabled={!loggedInUser}
         />
-
-        {/*        <Button variant="link" onClick={handleForgetSubmit}>
-          {}
-        </Button> */}
-      </form>
+      </Form>
     </div>
   );
 };
