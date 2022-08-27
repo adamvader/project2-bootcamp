@@ -8,6 +8,7 @@ import NewsFeed from "./NewsFeed";
 import NavBar from "./NavBar";
 import LocPage from "./LocationPage";
 import { Routes, Route, Link } from "react-router-dom";
+import UserSignOut from "./SignOut";
 
 const App = ({ onLoadSubmit, LocName, LocPic }) => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -35,6 +36,7 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
       {loggedInUser ? <NewsFeed /> : createAccountOrSignIn}
     </div>
   );
+  const signOut = <UserSignOut loggedInUser={loggedInUser} />;
 
   return (
     <div className="App">

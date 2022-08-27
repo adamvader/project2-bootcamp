@@ -10,6 +10,7 @@ import "./App.css";
 import ChooseLocation from "./ChooseLocation";
 import UserRating from "./Rating";
 import { useNavigate } from "react-router-dom";
+import HandleSignOut from "./SignOut";
 
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
@@ -81,6 +82,8 @@ const Upload = (props) => {
     <div className="Upload">
       <form onSubmit={handleSubmit}>
         <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
+        <HandleSignOut />
+
         <label>
           Upload:
           <input
