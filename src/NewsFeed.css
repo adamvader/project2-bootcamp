@@ -1,13 +1,11 @@
-.Card {
+/* .Card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .Card-Img {
-  /* width: 50vw;
-  height: 30vh; */
   width: 390px;
   height: 250px;
 }

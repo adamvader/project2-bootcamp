@@ -8,7 +8,8 @@ import NewsFeed from "./NewsFeed";
 import NavBar from "./NavBar";
 import LocPage from "./LocationPage";
 import { Routes, Route, Link } from "react-router-dom";
-import UserSignOut from "./SignOut";
+import Logo from "./bestsellers.png";
+import Button from "@mui/material/Button";
 
 const App = ({ onLoadSubmit, LocName, LocPic }) => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -26,9 +27,11 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
 
   const authForm = <AuthForm loggedInUser={loggedInUser} />;
   const createAccountOrSignIn = (
-    <div>
-      {/* add bestseller log */}
-      <Link to="authform">Create Account Or Sign In</Link>
+    <div clasName="firstPage">
+      <img id="logo" src={Logo} alt="Bestsellers logo" />
+      <Button component={Link} to="authform">
+        Create Account Or Sign In
+      </Button>
     </div>
   );
   const newsfeed = (
