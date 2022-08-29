@@ -10,7 +10,18 @@ import "./App.css";
 import ChooseLocation from "./ChooseLocation";
 import UserRating from "./Rating";
 import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import AddIcon from "@mui/icons-material/Add";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const theme = createTheme();
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
 
@@ -79,42 +90,74 @@ const Upload = (props) => {
 
   return (
     <div className="Upload">
-      <form onSubmit={handleSubmit}>
-        <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
-        <label>
-          Upload:
-          <input
-            type="file"
-            name="imageFileName"
-            value={imageFileName}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Name of Beer:
-          <input
-            type="text"
-            name="caption"
-            value={caption}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Comment:
-          <input
-            type="text"
-            name="comment"
-            value={comment}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <ChooseLocation onUpdate={updateLocation} />
-        <UserRating onUpdate={updateRating} />
-        <input type="submit" value="Upload!" disabled={!caption} />
-      </form>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <UploadFileIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Upload
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <Button variant="contained" component="label" color="primary">
+                <AddIcon /> Upload a file
+                <input
+                  type="file"
+                  name="imageFileName"
+                  value={imageFileName}
+                  onChange={handleInputChange}
+                  hidden
+                />
+              </Button>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="caption"
+                label="Name of Beer"
+                name="caption"
+                autoFocus
+                value={caption}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="comment"
+                label="Comment"
+                name="comment"
+                value={comment}
+                onChange={handleInputChange}
+              />
+              <ChooseLocation onUpdate={updateLocation} />
+              <UserRating onUpdate={updateRating} />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Upload!
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 };
