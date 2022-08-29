@@ -91,75 +91,81 @@ const Upload = (props) => {
 
   return (
     <div className="Upload">
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
+      {/* <ThemeProvider theme={theme}> */}
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            // marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <HandleSignOut />
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <UploadFileIcon />
+          </Avatar>
+          <Typography
+            component="h1"
+            variant="h5"
             sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              color: "Black",
             }}
           >
-            <HandleSignOut />
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <UploadFileIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Upload
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
+            Upload
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <Button variant="contained" component="label" color="primary">
+              <AddIcon /> Upload a file
+              <input
+                type="file"
+                name="imageFileName"
+                value={imageFileName}
+                onChange={handleInputChange}
+                hidden
+              />
+            </Button>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="caption"
+              label="Name of Beer"
+              name="caption"
+              autoFocus
+              value={caption}
+              onChange={handleInputChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="comment"
+              label="Comment"
+              name="comment"
+              value={comment}
+              onChange={handleInputChange}
+            />
+            <ChooseLocation onUpdate={updateLocation} />
+            <UserRating onUpdate={updateRating} />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
             >
-              <Button variant="contained" component="label" color="primary">
-                <AddIcon /> Upload a file
-                <input
-                  type="file"
-                  name="imageFileName"
-                  value={imageFileName}
-                  onChange={handleInputChange}
-                  hidden
-                />
-              </Button>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="caption"
-                label="Name of Beer"
-                name="caption"
-                autoFocus
-                value={caption}
-                onChange={handleInputChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="comment"
-                label="Comment"
-                name="comment"
-                value={comment}
-                onChange={handleInputChange}
-              />
-              <ChooseLocation onUpdate={updateLocation} />
-              <UserRating onUpdate={updateRating} />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Upload!
-              </Button>
-            </Box>
+              Upload!
+            </Button>
           </Box>
-        </Container>
-      </ThemeProvider>
+        </Box>
+      </Container>
+      {/* </ThemeProvider> */}
     </div>
   );
 };
