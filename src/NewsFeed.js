@@ -2,8 +2,22 @@ import React, { useEffect, useState } from "react";
 import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "./Firebase";
 import "./NewsFeed.css";
-import Card from "react-bootstrap/Card";
 import DisplayRating from "./DisplayRating";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const POSTS_FOLDER_NAME = "posts";
 
@@ -30,14 +44,33 @@ const NewsFeed = () => {
   }, []);
 
   let postCards = posts.map((post) => (
-    <Card key={post.key} className="Card">
+    <Card sx={{ maxWidth: 390 }} key={post.key} className="Card">
+      <CardHeader title={post.location} subheader={post.author} align="left" />
+      <CardMedia
+        component="img"
+        height="194"
+        image={post.image}
+        alt="post-image"
+        className="Card-Img"
+      />
+      <DisplayRating data={post.rating} />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary" align="left">
+          Beer: {post.caption}
+          <br />
+          Comment: {post.comment}
+        </Typography>
+      </CardContent>
+    </Card>
+
+    /*   <Card  key={post.key} className="Card">
       <Card.Img variant="top" src={post.image} className="Card-Img" />
       <DisplayRating data={post.rating} />
       <Card.Text>Beer: {post.caption}</Card.Text>
       <Card.Text>Comment: {post.comment}</Card.Text>
       <Card.Text>Location: {post.location}</Card.Text>
       <Card.Text>Author: {post.author}</Card.Text>
-    </Card>
+    </Card> */
   ));
   postCards.reverse();
   return postCards;

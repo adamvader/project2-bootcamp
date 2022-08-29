@@ -10,6 +10,7 @@ import "./App.css";
 import ChooseLocation from "./ChooseLocation";
 import UserRating from "./Rating";
 import { useNavigate } from "react-router-dom";
+import HandleSignOut from "./SignOut";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -101,6 +102,7 @@ const Upload = (props) => {
               alignItems: "center",
             }}
           >
+            <HandleSignOut />
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <UploadFileIcon />
             </Avatar>

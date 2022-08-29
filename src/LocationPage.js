@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
 
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -41,11 +43,19 @@ const LocPage = () => {
         <div>
           <SearchBar onUpdate={updateInfo} />
           <form>
-            <input type="button" onClick={handleLoadSubmit} value="search" />
+            <Button
+              variant="contained"
+              type="button"
+              onClick={handleLoadSubmit}
+              value="search"
+              children={<SearchIcon />}
+            />
+
+            {/* <input type="button" onClick={handleLoadSubmit} value="search" /> */}
           </form>
           <div>
-            <p>Name: {locName}</p>
-            <p>Address: {locAddress}</p>
+            <p>{!locName ? null : `Name: ${locName}`}</p>
+            <p>{!locAddress ? null : `Address: ${locAddress}`}</p>
             {locPic && <img src={locPic} />}
           </div>
         </div>
