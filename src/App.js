@@ -27,7 +27,7 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
 
   const authForm = <AuthForm loggedInUser={loggedInUser} />;
   const createAccountOrSignIn = (
-    <div clasName="firstPage">
+    <div className="firstPage">
       <img id="logo" src={Logo} alt="Bestsellers logo" />
       <Button component={Link} to="authform">
         Create Account Or Sign In

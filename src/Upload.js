@@ -121,13 +121,13 @@ const Upload = (props) => {
             sx={{ mt: 1 }}
           >
             <Button variant="contained" component="label" color="primary">
-              <AddIcon /> Upload a file
+              <AddIcon />
               <input
                 type="file"
                 name="imageFileName"
                 value={imageFileName}
                 onChange={handleInputChange}
-                hidden
+                // hidden
               />
             </Button>
             <TextField
