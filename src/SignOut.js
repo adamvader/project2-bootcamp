@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth } from "./Firebase";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const UserSignOut = () => {
+  const navigate = useNavigate();
   const handleSignOut = (event) => {
     signOut(auth).then(() => {
       alert("Sign-out successful");
     });
     /*     .then(resetForm)
     .catch(updateError); */
+    navigate("/");
   };
   return (
-    <Button
-      component={Link}
-      to="/authform"
-      type="button"
-      onClick={handleSignOut}
-      value="Sign Out here"
-    >
+    <Button type="button" onClick={handleSignOut} variant="contained">
       Sign Out
     </Button>
   );

@@ -20,9 +20,9 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+// const theme = createTheme();
 const POSTS_FOLDER_NAME = "posts";
 const IMAGES_FOLDER_NAME = "images";
 
@@ -102,7 +102,6 @@ const Upload = (props) => {
             alignItems: "center",
           }}
         >
-          <HandleSignOut />
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <UploadFileIcon />
           </Avatar>
@@ -162,6 +161,7 @@ const Upload = (props) => {
             >
               Upload!
             </Button>
+            <HandleSignOut />
           </Box>
         </Box>
       </Container>
