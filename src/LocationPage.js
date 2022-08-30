@@ -40,24 +40,22 @@ const LocPage = () => {
   return (
     <div className="locationPage">
       <div>
-        <div>
-          <SearchBar onUpdate={updateInfo} />
-          <form>
-            <Button
-              variant="contained"
-              type="button"
-              onClick={handleLoadSubmit}
-              value="search"
-              children={<SearchIcon />}
-            />
+        <SearchBar onUpdate={updateInfo} />
+        <form>
+          <Button
+            variant="contained"
+            type="button"
+            onClick={handleLoadSubmit}
+            value="search"
+            children={<SearchIcon />}
+          />
 
-            {/* <input type="button" onClick={handleLoadSubmit} value="search" /> */}
-          </form>
-          <div>
-            <p>{!locName ? null : `Name: ${locName}`}</p>
-            <p>{!locAddress ? null : `Address: ${locAddress}`}</p>
-            {locPic && <img src={locPic} />}
-          </div>
+          {/* <input type="button" onClick={handleLoadSubmit} value="search" /> */}
+        </form>
+        <div>
+          <p>{!locName ? null : `Name: ${locName}`}</p>
+          <p>{!locAddress ? null : `Address: ${locAddress}`}</p>
+          {locPic && <img src={locPic} />}
         </div>
       </div>
     </div>

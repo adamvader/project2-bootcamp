@@ -3,21 +3,11 @@ import { onChildAdded, ref as databaseRef } from "firebase/database";
 import { database } from "./Firebase";
 import "./NewsFeed.css";
 import DisplayRating from "./DisplayRating";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const POSTS_FOLDER_NAME = "posts";
 
@@ -44,8 +34,18 @@ const NewsFeed = () => {
   }, []);
 
   let postCards = posts.map((post) => (
-    <Card sx={{ maxWidth: 390 }} key={post.key} className="Card">
-      <CardHeader title={post.location} subheader={post.author} align="left" />
+    <Card
+      sx={{ maxWidth: 390 }}
+      key={post.key}
+      className="Card"
+      variant="Outlined"
+    >
+      <CardHeader
+        title={post.location}
+        subheader={post.author}
+        align="left"
+        sx={{ mb: -1 }}
+      />
       <CardMedia
         component="img"
         height="194"
@@ -53,11 +53,22 @@ const NewsFeed = () => {
         alt="post-image"
         className="Card-Img"
       />
-      <DisplayRating data={post.rating} />
       <CardContent>
-        <Typography variant="body2" color="text.secondary" align="left">
+        <DisplayRating data={post.rating} />
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="left"
+          sx={{ fontSize: 18 }}
+        >
           Beer: {post.caption}
-          <br />
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="left"
+          sx={{ fontSize: 18 }}
+        >
           Comment: {post.comment}
         </Typography>
       </CardContent>

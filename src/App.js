@@ -43,7 +43,6 @@ const App = ({ onLoadSubmit, LocName, LocPic }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <br />
         <Routes>
           <Route path="/" element={newsfeed} />
           <Route path="/authform" element={authForm} />
