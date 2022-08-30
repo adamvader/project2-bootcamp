@@ -102,6 +102,8 @@ const Upload = (props) => {
             alignItems: "center",
           }}
         >
+          <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
+          <HandleSignOut />
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <UploadFileIcon />
           </Avatar>
@@ -161,7 +163,6 @@ const Upload = (props) => {
             >
               Upload!
             </Button>
-            <HandleSignOut />
           </Box>
         </Box>
       </Container>
