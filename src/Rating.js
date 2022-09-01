@@ -9,10 +9,12 @@ const UserRating = (props) => {
   return (
     <Box
       sx={{
-        "& > legend": { mt: 2 },
+        mt: 2,
+        justifyContent: "center",
+        display: "flex",
       }}
     >
-      <Typography component="legend">Rating</Typography>
+      <Typography component="legend">Rating:</Typography>
       <Rating
         name="simple-controlled"
         value={value}

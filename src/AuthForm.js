@@ -11,18 +11,14 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import Logo from "./bestsellers.png";
 
 const AuthForm = ({ loggedInUser }) => {
   const [isNewUser, setIsNewUser] = useState(false);
@@ -109,8 +105,11 @@ const AuthForm = ({ loggedInUser }) => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="Auth">
+      <div className="logoAuth">
+        <img id="logo" src={Logo} alt="Bestsellers logo" />
+      </div>
+      <div className="AuthForm">
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -126,16 +125,13 @@ const AuthForm = ({ loggedInUser }) => {
               variant="h5"
               sx={{
                 color: "Black",
+                mt: 2,
+                mb: -2,
               }}
             >
               <p>{!isNewUser ? "Sign in" : "Create account"}</p>
             </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} noValidate>
               <TextField
                 margin="normal"
                 required

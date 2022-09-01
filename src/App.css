@@ -5,30 +5,113 @@
 #logo {
   max-width: 300px;
   pointer-events: none;
+}
+
+.logoAuth {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  margin-top: 30%;
+}
+
+#logo-app {
+  max-width: 150px;
+  justify-content: flex-start;
+  margin: 3% 0 0 3.5%;
+  display: flex;
 }
 
 .App-header {
-  background-color: rgb(220, 217, 217);
-  height: 844px;
+  background-color: rgb(255, 255, 255);
+  height: 804px;
   display: flex;
   flex-direction: column;
   align-items: top;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
   width: 390px;
 }
 
+.firstPage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.Auth {
+  height: 100%;
+}
+
+.AuthForm {
+  margin-top: 5%;
+}
+
 .UploadAndNewsFeed {
-  background-color: white;
-  color: black;
   overflow: scroll;
+  height: 100%;
 }
 
 .Upload {
-  background-color: white;
+  height: 100%;
+}
+
+.locationPage {
   color: black;
-  height: 844px;
+  height: 100%;
+}
+.UserAndLogOut {
+  display: flex;
+  justify-content: space-between;
+  margin: 4.5% 1% 0 0;
+}
+.Upload-User {
+  font-size: 17px;
+  margin: 3% 0 0 3.5%;
+  display: flex;
+}
+
+.SignOut {
+  margin-top: -0.5%;
+}
+
+.Ava-User {
+  display: flex;
+  margin-left: 3%;
+}
+
+.Searches {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.Page-info {
+  margin-top: 10%;
+  text-align: left;
+  margin-left: 5%;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  gap: 25px;
+}
+
+.LocInfo {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.LocInfoAdd {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Cat {
+  font-weight: bold;
+}
+
+.LocPic {
+  margin-top: 9%;
 }

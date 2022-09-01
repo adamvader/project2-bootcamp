@@ -3,6 +3,7 @@ import axios from "axios";
 import SearchBar from "./SearchBar";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import Logo from "./bestsellers.png";
 
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -30,7 +31,7 @@ const LocPage = () => {
       setLocAddress(placeInfo.result.formatted_address);
       const photoReference = placeInfo.result.photos[0].photo_reference;
       setLocPic(
-        `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${photoReference}&key=${GOOGLE_MAPS_API_KEY}`
+        `https://maps.googleapis.com/maps/api/place/photo?maxwidth=390&photo_reference=${photoReference}&key=${GOOGLE_MAPS_API_KEY}`
       );
     } catch (error) {
       console.log(error);
@@ -39,24 +40,41 @@ const LocPage = () => {
 
   return (
     <div className="locationPage">
-      <div>
-        <SearchBar onUpdate={updateInfo} />
-        <form>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={handleLoadSubmit}
-            value="search"
-            children={<SearchIcon />}
-          />
+      <img id="logo-app" src={Logo} alt="Bestsellers logo" />
 
-          {/* <input type="button" onClick={handleLoadSubmit} value="search" /> */}
-        </form>
-        <div>
-          <p>{!locName ? null : `Name: ${locName}`}</p>
-          <p>{!locAddress ? null : `Address: ${locAddress}`}</p>
-          {locPic && <img src={locPic} />}
+      <div>
+        <div className="Searches">
+          <div className="searchBar">
+            <SearchBar onUpdate={updateInfo} />
+          </div>
+          <div className="search-button">
+            <form>
+              <Button
+                variant="contained"
+                type="button"
+                onClick={handleLoadSubmit}
+                value="search"
+                children={<SearchIcon />}
+                sx={{ height: 55, mt: 2 }}
+              />
+
+              {/* <input type="button" onClick={handleLoadSubmit} value="search" /> */}
+            </form>
+          </div>
         </div>
+        <div className="Page-info">
+          <div className="LocInfo">
+            <span className="Cat">{!locName ? null : `Name: `}</span>
+            &nbsp;
+            <span>{!locName ? null : locName}</span>
+          </div>
+          <div className="LocInfoAdd">
+            <span className="Cat">{!locName ? null : `Address: `}</span>
+            &nbsp;
+            <span>{!locAddress ? null : locAddress}</span>
+          </div>
+        </div>
+        <div className="LocPic">{locPic && <img src={locPic} />}</div>
       </div>
     </div>
   );

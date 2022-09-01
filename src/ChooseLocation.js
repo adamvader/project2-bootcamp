@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
+import "./App.css";
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
@@ -94,10 +95,13 @@ export default function GoogleMaps(props) {
   }, [value, inputValue, fetch]);
 
   return (
-    <div>
+    <div className="search">
       <Autocomplete
         id="google-map-demo"
-        sx={{ width: 300, bgcolor: "white", mt: 2 }}
+        sx={{
+          bgcolor: "white",
+          mt: 2,
+        }}
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
@@ -133,7 +137,10 @@ export default function GoogleMaps(props) {
                 <Grid item>
                   <Box
                     component={LocationOnIcon}
-                    sx={{ color: "text.secondary", mr: 2 }}
+                    sx={{
+                      color: "text.secondary",
+                      mr: 2,
+                    }}
                   />
                 </Grid>
                 <Grid item xs>

@@ -35,7 +35,7 @@ const NewsFeed = () => {
 
   let postCards = posts.map((post) => (
     <Card
-      sx={{ maxWidth: 390 }}
+      sx={{ maxWidth: 390, height: 510 }}
       key={post.key}
       className="Card"
       variant="Outlined"

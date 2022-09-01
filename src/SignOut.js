@@ -15,7 +15,7 @@ const UserSignOut = () => {
     navigate("/");
   };
   return (
-    <Button type="button" onClick={handleSignOut} variant="contained">
+    <Button type="button" onClick={handleSignOut} variant="text">
       Sign Out
     </Button>
   );

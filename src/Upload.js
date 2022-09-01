@@ -20,6 +20,8 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Logo from "./bestsellers.png";
+
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // const theme = createTheme();
@@ -91,47 +93,59 @@ const Upload = (props) => {
 
   return (
     <div className="Upload">
-      {/* <ThemeProvider theme={theme}> */}
+      <img id="logo-app" src={Logo} alt="Bestsellers logo" />
+      <div className="UserAndLogOut">
+        <div className="Ava-User">
+          {props.loggedInUser ? (
+            <Avatar sx={{ width: 28, height: 28 }} />
+          ) : null}
+          <span className="Upload-User">
+            {props.loggedInUser ? props.loggedInUser.email : null}
+          </span>
+        </div>
+        <div className="SignOut">
+          <HandleSignOut />
+        </div>
+      </div>
+
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
-            // marginTop: 8,
+            mt: 7,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <p>{props.loggedInUser ? props.loggedInUser.email : null}</p>
-          <HandleSignOut />
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <UploadFileIcon />
-          </Avatar>
           <Typography
             component="h1"
             variant="h5"
             sx={{
               color: "Black",
+              mb: 3,
             }}
           >
-            Upload
+            New post
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
+            /* justifyContent="left" */
           >
-            <Button variant="contained" component="label" color="primary">
+            <Button variant="contained" component="label" fullWidth>
               <AddIcon />
               <input
                 type="file"
                 name="imageFileName"
                 value={imageFileName}
                 onChange={handleInputChange}
-                // hidden
               />
             </Button>
+
+            <ChooseLocation onUpdate={updateLocation} />
+            <UserRating onUpdate={updateRating} />
             <TextField
               margin="normal"
               required
@@ -147,19 +161,24 @@ const Upload = (props) => {
               margin="normal"
               required
               fullWidth
+              multiline
+              rows={2}
               id="comment"
               label="Comment"
               name="comment"
               value={comment}
               onChange={handleInputChange}
+              InputProps={{ sx: { height: 90 } }}
             />
-            <ChooseLocation onUpdate={updateLocation} />
-            <UserRating onUpdate={updateRating} />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+              }}
             >
               Upload!
             </Button>

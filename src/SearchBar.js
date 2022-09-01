@@ -101,7 +101,7 @@ const SearchBar = (props) => {
         <div>
           <Autocomplete
             id="google-map-demo"
-            sx={{ width: 300, bgcolor: "white", mt: 2 }}
+            sx={{ width: 280, bgcolor: "white", mt: 2 }}
             getOptionLabel={(option) =>
               typeof option === "string" ? option : option.description
             }
