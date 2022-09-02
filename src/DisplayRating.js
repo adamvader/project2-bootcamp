@@ -9,7 +9,7 @@ const DisplayRating = (props) => {
       {/* <Typography component="legend" color="text.secondary">
         Rating:
       </Typography> */}
-      <Rating name="simple-controlled" value={props.data} size="small" />
+      <Rating name="read-only" value={props.data} size="small" readOnly />
     </Box>
   );
 };
